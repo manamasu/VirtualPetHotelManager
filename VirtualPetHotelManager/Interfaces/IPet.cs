@@ -1,4 +1,6 @@
-﻿namespace VirtualPetHotelManager.Interfaces
+﻿using VirtualPetHotelManager.Models;
+
+namespace VirtualPetHotelManager.Interfaces
 {
     public interface IPet
     {
@@ -12,6 +14,6 @@
         void MakeSound();
 
         //Display current condition of pet: e.g "<PetName> is <MoodLevel> and <HungerLevel>
-        string GetStatus();
+        string GetStatus(Pet pet);
     }
 }

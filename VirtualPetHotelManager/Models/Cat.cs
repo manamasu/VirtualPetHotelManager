@@ -2,6 +2,6 @@
 {
     internal class Cat : Pet
     {
-
+        public Cat(string petName) : base(petName) { }
     }
 }
