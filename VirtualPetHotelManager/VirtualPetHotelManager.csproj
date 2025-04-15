@@ -8,9 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="ASCII\" />
 		<Folder Include="Tests\" />
-		<Folder Include="Utilities\" />
 		<Folder Include="Services\" />
 	</ItemGroup>
 

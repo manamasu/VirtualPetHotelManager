@@ -1,1 +1,3 @@
-﻿Console.WriteLine("Hello to your VirtualPetHotelManager");
+﻿using VirtualPetHotelManager.Menus;
+
+MainMenu.Menu();
