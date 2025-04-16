@@ -1,4 +1,5 @@
-﻿using static VirtualPetHotelManager.Utilities.TypeHelper;
+﻿using VirtualPetHotelManager.Models;
+using static VirtualPetHotelManager.Utilities.TypeHelper;
 
 namespace VirtualPetHotelManager.Menus
 {
@@ -9,39 +10,60 @@ namespace VirtualPetHotelManager.Menus
             string welcomeMessage = "Welcome to your VirtualPetHotelManager!";
 
             TypeWriterEffect(welcomeMessage, 40);
+            StartOptionMenu();
 
-            Console.WriteLine("Start by pressing an option:");
-            Console.WriteLine("1) Choose a Cat");
-            Console.WriteLine("2) Choose a Dog");
-            Console.WriteLine("3) Choose a Hamster");
-            Console.WriteLine("4) Choose a Fish");
-            Console.WriteLine("5) Show Help");
-            Console.WriteLine("6) Exit");
-            Console.Write("\r\nSelect an option: ");
             bool showMenu = true;
             while (showMenu)
             {
                 var keyInfo = Console.ReadKey();
-                switch (keyInfo.KeyChar)
+                switch (keyInfo.Key)
                 {
-                    case '1':
-                        Console.WriteLine("hi from cat");
-                        showMenu = false;
+                    case ConsoleKey.D1:
+                        Console.WriteLine();
+                        Console.WriteLine("Would you like to have a Cat?");
+                        Console.WriteLine("Press Enter to confirm. Press Escape to go back to the MainMenu.");
+                        var action = Console.ReadKey().Key;
+                        if (action == ConsoleKey.Enter)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Congratulations! You have a new cat.");
+                            Console.WriteLine("Please enter a name for your pet: ");
+                            string petName = "";
+
+                            while (string.IsNullOrWhiteSpace(petName))
+                            {
+                                petName = Console.ReadLine();
+                                if (string.IsNullOrWhiteSpace(petName))
+                                {
+                                    Console.WriteLine("You have to give your pet a name. Try again");
+                                }
+                            }
+
+                            Cat cat = new(petName);
+                            Console.WriteLine("Cat got created!");
+                            Thread.Sleep(2000);
+                            Console.Clear();
+                            StartOptionMenu();
+                        }
+                        else if (action == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            StartOptionMenu();
+                        }
                         break;
-                    case '2':
+                    case ConsoleKey.D2:
                         Console.WriteLine("hi from dog");
                         showMenu = false;
                         break;
-                    case '3':
+                    case ConsoleKey.D3:
                         Console.WriteLine("hi from hamster");
                         showMenu = false;
                         break;
-
-                    case '4':
+                    case ConsoleKey.D4:
                         Console.WriteLine("hi from fish");
                         showMenu = false;
                         break;
-                    case '5':
+                    case ConsoleKey.D5:
                         Console.Clear();
                         string gameRules = """
                             The Rules are simple: 
@@ -55,13 +77,24 @@ namespace VirtualPetHotelManager.Menus
                             """;
                         TypeWriterEffect(gameRules, 40);
                         break;
-                    default:
+                    case ConsoleKey.Escape:
                         Console.WriteLine("EXIT!!!");
                         showMenu = false;
                         break;
                 }
             }
 
+        }
+
+        private static void StartOptionMenu()
+        {
+            Console.WriteLine("Start by pressing an option:");
+            Console.WriteLine("1) Choose a Cat");
+            Console.WriteLine("2) Choose a Dog");
+            Console.WriteLine("3) Choose a Hamster");
+            Console.WriteLine("5) Show Help");
+            Console.WriteLine("Escape) Exit");
+            Console.Write("\r\nSelect an option: ");
         }
     }
 }

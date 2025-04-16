@@ -1,20 +1,23 @@
 ﻿using VirtualPetHotelManager.Enums;
 using VirtualPetHotelManager.Interfaces;
+using static VirtualPetHotelManager.Utilities.EnumHelper;
 
 namespace VirtualPetHotelManager.Models
 {
-    public class Pet : IPet
+    public abstract class Pet : IPet
     {
-        public required virtual string PetName { get; set; }
+        public string PetName { get; set; }
         public virtual HungerLevel HungerLevel { get; set; }
         public virtual MoodLevel MoodLevel { get; set; }
         public virtual int EnergyLevel { get; set; }
 
+        private readonly Random _random = new();
+
         protected Pet(string petname)
         {
             PetName = petname;
-            HungerLevel = HungerLevel.Hungry;
-            MoodLevel = MoodLevel.Relaxed;
+            HungerLevel = GetRandomEnumValue<HungerLevel>(_random);
+            MoodLevel = GetRandomEnumValue<MoodLevel>(_random);
             EnergyLevel = 80;
         }
 
@@ -29,10 +32,8 @@ namespace VirtualPetHotelManager.Models
             return $"{pet.PetName} is ${pet.MoodLevel}, is ${pet.HungerLevel} and has ${pet.EnergyLevel}% Energy left.";
         }
 
-        public virtual void MakeSound()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract void MakeSound();
+
 
         public void Play()
         {

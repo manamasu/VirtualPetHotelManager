@@ -1,9 +1,8 @@
 ﻿namespace VirtualPetHotelManager.Models
 {
-    public class Cat : Pet
+    internal class Hamster : Pet
     {
-
-        public Cat(string petName) : base(petName) { }
+        public Hamster(string petName) : base(petName) { }
 
         public override void MakeSound()
         {

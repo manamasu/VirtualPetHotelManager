@@ -8,6 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Folder Include="Audios\" />
 		<Folder Include="Tests\" />
 		<Folder Include="Services\" />
 	</ItemGroup>
