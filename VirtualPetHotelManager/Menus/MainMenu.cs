@@ -1,5 +1,7 @@
 ﻿using VirtualPetHotelManager.Models;
+using static VirtualPetHotelManager.Menus.ConfirmationMenu;
 using static VirtualPetHotelManager.Utilities.TypeHelper;
+using static VirtualPetHotelManager.Utilities.JsonFileHelper;
 
 namespace VirtualPetHotelManager.Menus
 {
@@ -30,18 +32,24 @@ namespace VirtualPetHotelManager.Menus
                             Console.WriteLine("Please enter a name for your pet: ");
                             string petName = "";
 
-                            while (string.IsNullOrWhiteSpace(petName))
+
+                            while (string.IsNullOrWhiteSpace(petName) && !ConfirmPetName(petName))
                             {
                                 petName = Console.ReadLine();
                                 if (string.IsNullOrWhiteSpace(petName))
                                 {
                                     Console.WriteLine("You have to give your pet a name. Try again");
                                 }
+                                else
+                                {
+                                    ConfirmPetName(petName);
+                                }
                             }
 
                             Cat cat = new(petName);
-                            Console.WriteLine("Cat got created!");
-                            Thread.Sleep(2000);
+                            Console.WriteLine($"You have a new {cat.GetType().Name} with the name: {cat.PetName}. Congratulations!!!");
+                            SaveToJSON(cat);
+                            Thread.Sleep(8000);
                             Console.Clear();
                             StartOptionMenu();
                         }
